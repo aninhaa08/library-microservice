@@ -33,13 +33,13 @@ Nomeie sua nova branch seguindo os padrões abaixo.
 Sua branch deve conter 2 partes:
 
 1. Tipo de mudança/funcionalidade:
-   **docs**: apenas mudanças na documentação;
-   **feat**: nova funcionalidade (mais utilizado);
-   **fix**: correção de bugs;
-   **test**: adicionar ou corrigir testes;
-   **perf**: mudança de código para melhorar sua performance;
-   **refactor**: mudança de código que não adiciona uma funcionalidade e também não corrige um bug;
-   **style**: mudanças no código que não afetam seu significado (espaço em branco, formatação, ponto e vírgula, etc).
+   - **docs**: apenas mudanças na documentação;
+   - **feat**: nova funcionalidade (mais utilizado);
+   - **fix**: correção de bugs;
+   - **test**: adicionar ou corrigir testes;
+   - **perf**: mudança de código para melhorar sua performance;
+   - **refactor**: mudança de código que não adiciona uma funcionalidade e também não corrige um bug;
+   - **style**: mudanças no código que não afetam seu significado (espaço em branco, formatação, ponto e vírgula, etc).
 
 2. O que a branch faz:
    Descreva de forma resumida e com palavras-chaves a funcionalidade da sua branch.
@@ -49,8 +49,8 @@ feat-cadastro-livros
 
 ## Funcionalidades do microserviço
 
-  📥 Cadastro de novos livros e autores;
-  🔍 Busca por título, autor e ISBN;
-  ✏️ Edição de dados existentes;
-  🗑️ Remoção de livros e autores.
+  - 📥 Cadastro de novos livros e autores;
+  - 🔍 Busca por título, autor e ISBN;
+  - ✏️ Edição de dados existentes;
+  - 🗑️ Remoção de livros e autores.
   
