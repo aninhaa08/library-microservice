@@ -2,6 +2,13 @@
 
 Este projeto é um microserviço responsável por gerenciar o catálogo de uma biblioteca, permitindo o cadastro, edição, exclusão e busca de livros e autores.
 
+### Funcionalidades do microserviço
+
+  - 📥 Cadastro de novos livros e autores;
+  - 🔍 Busca por título, autor e ISBN;
+  - ✏️ Edição de dados existentes;
+  - 🗑️ Remoção de livros e autores.
+
 ## 🚀 Como rodar o projeto localmente
 
 Para clonar e executar o projeto localmente, siga os passos abaixo:
@@ -42,15 +49,102 @@ Sua branch deve conter 2 partes:
    - **style**: mudanças no código que não afetam seu significado (espaço em branco, formatação, ponto e vírgula, etc).
 
 2. O que a branch faz:
-   Descreva de forma resumida e com palavras-chaves a funcionalidade da sua branch.
+   - Descreva de forma resumida e com palavras-chaves a funcionalidade da sua branch.
 
 **Exemplo de nome de branch:**
 feat-cadastro-livros
 
-## Funcionalidades do microserviço
+---
 
-  - 📥 Cadastro de novos livros e autores;
-  - 🔍 Busca por título, autor e ISBN;
-  - ✏️ Edição de dados existentes;
-  - 🗑️ Remoção de livros e autores.
-  
+## 📘 Rodando o banco Postgres e a aplicação
+
+### Requisitos 
+
+- [Docker](https://www.docker.com/) **obrigatório**
+- [DBeaver](https://dbeaver.io/)
+- [Insomnia](https://insomnia.rest/) **ou** [Postman](https://www.postman.com/) 
+
+
+### 1. Subir o banco PostgreSQL com Docker
+
+1. Crie um arquivo com nome `.env` na raiz do projeto com o seguinte conteúdo:
+
+    ```env
+    DB_NAME=meubanco
+    DB_USER=meuusuario
+    DB_PASSWORD=minhasenha
+    ```
+
+2. Rode o banco de dados no terminal:
+
+    ```bash
+    docker-compose up -d
+    ```
+
+### 2. Rodar a aplicação no IntelliJ
+
+1. Clique na opção de menu no canto superior esquerdo
+2. Vá em  `Run > Edit Configurations`
+3. Em **Environment Variables**, adicione:
+
+    ```
+    db_name=meubanco
+    db_user=meuusuario
+    db_password=minhasenha
+    ```
+
+---
+
+### 3. Acessar o banco pelo DBeaver
+   - Esse passo é para caso você deseje visualizar o banco de dados, suas tabelas e dados. *Não é obrigatório.*
+
+1. Abra o DBeaver
+2. Clique em `Nova Conexão > PostgreSQL`
+3. Preencha os dados:
+
+    - **Host**: `localhost`
+    - **Porta**: `5432`
+    - **Database**: `meubanco`
+    - **User**: `meuusuario`
+    - **Password**: `minhasenha`
+
+4. Navegue e visualize o banco e suas tabelas.
+
+
+## 4. Fazer requisições às rotas com Insomnia / Postman
+
+1. Siga os passos 1 e 2 para rodar sua aplicação no IntelliJ + subir o banco no Docker
+2. Clique em "Create" e crie uma coleção na ferramenta de requisições escolhida (Insomnia/Postman) caso ainda não possua uma
+3. Clique em "+" para adicionar uma nova requisição
+4. Selecione o tipo de requisição desejada (get/post/put/delete) e adicione a url da aplicação (localhost:8080)
+5. Na frente da url, adicione a rota a ser acessada (como "/books")
+6. Exemplo de requisição GET:
+
+    ```
+    GET http://localhost:8080/books
+    ```
+
+7. Para POSTs, clique em "Body" e adicione o código JSON adequado (que inclua todos os parâmetros necessários para a requisição)
+8. Selecione "Send" e teste sua requisição.
+
+---
+
+- Banco de dados: disponível via Docker e acessível em `localhost:5432`
+- Aplicação: rodando localmente via `localhost:8080`
+- Requisições via Insomnia/Postman e consultas via DBeaver
+
+
+---
+
+## 👥 Integrantes do Grupo e funções
+
+| Nome Completo                            | Função/Responsabilidades       |
+|------------------------------------------|--------------------------------|
+| Ana Carolina Souto Miranda               | ...                            |
+| Caio Juhasz Danjó                        | ...                            |
+| Felipe Cruz da Silva Santos              | ...                            |
+| Lívia Gabriela Lana Antas                | ...                            |
+| Maria Eduarda Loreta Silva Santos        | ...                            |
+| Maria Eduarda Santana Marques            | ...                            |
+
+
