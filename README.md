@@ -4,10 +4,11 @@ Este projeto é um microserviço responsável por gerenciar o catálogo de uma b
 
 ### Funcionalidades do microserviço
 
-  - 📥 Cadastro de novos livros e autores;
-  - 🔍 Busca por título, autor e ISBN;
+  - 📥 Cadastro de novos livros, autores e gêneros literários;
+  - 🔍 Busca de livros por título, autor e id;
+  - 🔍 Busca de autor por id;
   - ✏️ Edição de dados existentes;
-  - 🗑️ Remoção de livros e autores.
+  - 🗑️ Remoção de livros, autores e gêneros.
 
 ## 🚀 Como rodar o projeto localmente
 
@@ -112,6 +113,7 @@ feat-cadastro-livros
 
 
 ## 4. Fazer requisições às rotas com Insomnia / Postman
+  - Esse passo serve para validar se os endpoints (get/post/put/delete) da aplicação estão funcionando corretamente. *Não é obrigatório.*
 
 1. Siga os passos 1 e 2 para rodar sua aplicação no IntelliJ + subir o banco no Docker
 2. Clique em "Create" e crie uma coleção na ferramenta de requisições escolhida (Insomnia/Postman) caso ainda não possua uma
