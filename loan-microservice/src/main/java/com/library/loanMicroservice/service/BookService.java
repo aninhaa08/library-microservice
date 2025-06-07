@@ -13,4 +13,9 @@ public class BookService {
     public BookService(BookRepository bookRepository){
         this.bookRepository = bookRepository;
     }
+
+    public List<Book> findByGenreName(String genre) {
+        return bookRepository.findByGenre_NameIgnoreCase(genre);
+    }
 }
+
