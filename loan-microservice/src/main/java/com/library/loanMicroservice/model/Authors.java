@@ -28,7 +28,7 @@ public class Authors {
     @JsonIgnoreProperties("author")
     private List<Books> books;
 
-    @Column(name = "createdAt", nullable = false, updatable = false)
+    @Column(name = "createdAt", nullable = true, updatable = false)
     private LocalDateTime createdAt;
 
 

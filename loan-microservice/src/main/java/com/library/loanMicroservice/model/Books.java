@@ -25,19 +25,14 @@ public class Books {
     private String title;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "authorId")
+    @JoinColumn(name = "author_id")
     @JsonIgnoreProperties("books")
     private Authors author;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoryId")
-    @JsonIgnoreProperties("books")
-    private Category categories;
 
     @Column(nullable = true)
     private String preface;
 
-    @Column(name = "publication_year", nullable = false)
+    @Column(name = "publication_year", nullable = true)
     private LocalDateTime publicationYear;
 
     public void setId(Integer id) {
@@ -50,10 +45,6 @@ public class Books {
 
     public void setAuthor(Authors author) {
         this.author = author;
-    }
-
-    public void setCategories(Category categories) {
-        this.categories = categories;
     }
 
     public void setPreface(String preface) {
@@ -75,10 +66,6 @@ public class Books {
 
     public Authors getAuthor() {
         return author;
-    }
-
-    public Category getCategories() {
-        return categories;
     }
 
     public String getPreface() {

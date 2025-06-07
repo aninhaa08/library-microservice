@@ -3,6 +3,8 @@ package com.library.loanMicroservice.model;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table (name = "genres")
 public class Genre {
@@ -14,6 +16,7 @@ public class Genre {
     private String name;
 
     @OneToMany(mappedBy = "genre")
+    @JsonIgnoreProperties("books")
     private List<Book> books;
 
     public List<Book> getBooks() {

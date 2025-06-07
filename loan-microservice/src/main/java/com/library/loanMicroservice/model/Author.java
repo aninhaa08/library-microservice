@@ -14,7 +14,7 @@ public class Author {
 
     private String name;
 
-    @Column(name = "birth_date")
+    @Column(name = "birth_date", nullable = true)
     private OffsetDateTime dataNascimento;
 
     @OneToMany(mappedBy = "author")

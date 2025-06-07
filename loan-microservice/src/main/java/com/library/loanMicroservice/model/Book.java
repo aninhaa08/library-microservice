@@ -1,7 +1,8 @@
 package com.library.loanMicroservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 @Table (name = "books")
@@ -13,15 +14,17 @@ public class Book {
 
     private String title;
 
-    @Column(name = "year_publication")
+    @Column(name = "year_publication", nullable = true)
     private Integer year_publication;
 
     @ManyToOne
     @JoinColumn(name = "author_id")
+    @JsonIgnoreProperties("books")
     private Author author;
 
     @ManyToOne
     @JoinColumn(name = "genre_id")
+    @JsonIgnoreProperties("books")
     private Genre genre;
 
     public Long getId() {
