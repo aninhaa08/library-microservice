@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.library.loanMicroservice.service.BooksService;
+import com.library.loanMicroservice.service.AuthorService;
 
 @RestController
-@RequestMapping("/books")
-public class BooksController {
-    
+@RequestMapping("/authors")
+public class AuthorController {
+
     @Autowired
-    private BooksService booksService;
+    private AuthorService authorService;
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok().body(this.booksService.deleteById(id));
+        return ResponseEntity.ok().body(authorService.deleteById(id));
     }
 }
