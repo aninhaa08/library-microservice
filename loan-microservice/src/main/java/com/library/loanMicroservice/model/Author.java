@@ -1,6 +1,6 @@
 package com.library.loanMicroservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -21,6 +21,7 @@ public class Author {
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "author")
+    @JsonManagedReference
     private List<Book> books;
 
     public Long getId() {
