@@ -1,7 +1,7 @@
 CREATE TABLE authors (
     id INT8 GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name TEXT NOT NULL,
-    birth_date TIMESTAMP
+    birth_date DATE
 );
 
 CREATE TABLE genres (

@@ -2,6 +2,7 @@ package com.library.loanMicroservice.service;
 
 import java.util.Optional;
 
+import com.library.loanMicroservice.dto.AuthorDto;
 import com.library.loanMicroservice.model.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,16 @@ public class AuthorService {
     @Autowired
     private AuthorRepository authorRepository;
 
-    public String deleteById(Integer id) {
-        Optional<Author> author = authorRepository.findById(Long.valueOf(id));
+    public Author createAuthor(AuthorDto dto){
+        Author author = new Author();
+
+        author.setName(dto.getName());
+        author.setBirthDate(dto.getBirthDate());
+        return authorRepository.save(author);
+    }
+
+    public String deleteById(Long id) {
+        Optional<Author> author = authorRepository.findById(id);
         if (!author.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor não encontrado.");
         }

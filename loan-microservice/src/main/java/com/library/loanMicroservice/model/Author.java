@@ -1,6 +1,8 @@
 package com.library.loanMicroservice.model;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -15,7 +17,7 @@ public class Author {
     private String name;
 
     @Column(name = "birth_date")
-    private OffsetDateTime dataNascimento;
+    private LocalDate birthDate;
 
     @OneToMany(mappedBy = "author")
     private List<Book> books;
@@ -36,12 +38,12 @@ public class Author {
         this.name = name;
     }
 
-    public OffsetDateTime getDataNascimento() {
-        return dataNascimento;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setDataNascimento(OffsetDateTime dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public List<Book> getBooks() {
