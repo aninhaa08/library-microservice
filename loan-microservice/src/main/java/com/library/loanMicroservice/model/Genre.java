@@ -1,16 +1,20 @@
 package com.library.loanMicroservice.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
 @Table (name = "genres")
+@Schema(description = "Representa um gênero")
 public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "ID do gênero", example = "1")
     private Long id;
 
+    @Schema(description = "Nome do gênero", example = "Romance")
     private String name;
 
     @OneToMany(mappedBy = "genre")

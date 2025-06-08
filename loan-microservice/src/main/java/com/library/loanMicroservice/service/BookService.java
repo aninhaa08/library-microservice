@@ -20,6 +20,14 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
+    public List<Book> findByGenreName(String genre) {
+        return bookRepository.findByGenre_NameIgnoreCase(genre);
+    }
+
+    public Optional<Book> getBookById(Long id) {
+        return this.bookRepository.findById(id);
+    }
+
     public String deleteById(Integer id) {
         Optional<Book> book = bookRepository.findById(Long.valueOf(id));
         if (!book.isPresent()) {
