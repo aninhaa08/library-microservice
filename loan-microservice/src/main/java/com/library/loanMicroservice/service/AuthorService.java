@@ -25,6 +25,10 @@ public class AuthorService {
         return authorRepository.save(author);
     }
 
+    public Optional<Author> getAuthorById(Long id) {
+        return this.authorRepository.findById(id);
+    }
+
     public String deleteById(Long id) {
         Optional<Author> author = authorRepository.findById(id);
         if (!author.isPresent()) {

@@ -20,6 +20,10 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
+    public Optional<Book> getBookById(Long id) {
+        return this.bookRepository.findById(id);
+    }
+
     public String deleteById(Integer id) {
         Optional<Book> book = bookRepository.findById(Long.valueOf(id));
         if (!book.isPresent()) {
