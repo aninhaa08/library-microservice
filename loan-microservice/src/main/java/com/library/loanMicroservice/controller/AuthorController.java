@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.library.loanMicroservice.service.AuthorService;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/authors")
@@ -22,6 +23,13 @@ public class AuthorController {
     public ResponseEntity<Author> createAuthor(@RequestBody @Valid AuthorDto dto){
         Author saved = this.authorService.createAuthor(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Author> getAuthor(@PathVariable("id") Long id) {
+        return authorService.getAuthorById(id)
+                .map(ResponseEntity::ok)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor não encontrado"));
     }
 
     @DeleteMapping("/{id}")
