@@ -21,7 +21,6 @@ public class Author {
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "author")
-    @JsonIgnore
     private List<Book> books;
 
     public Long getId() {
