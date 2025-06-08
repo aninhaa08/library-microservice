@@ -1,6 +1,5 @@
 package com.library.loanMicroservice.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,7 +17,6 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "author_id")
-    @JsonBackReference
     private Author author;
 
     @ManyToOne
