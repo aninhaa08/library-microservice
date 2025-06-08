@@ -39,8 +39,7 @@ public class AuthorController {
             @ApiResponse(responseCode = "409", description = "Autor já existente"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
-  
-    @PostMapping("/postAuthor")
+
     @PostMapping
     public ResponseEntity<Author> createAuthor(@RequestBody @Valid AuthorDto dto){
         Author saved = this.authorService.createAuthor(dto);
