@@ -2,7 +2,6 @@ package com.library.loanMicroservice.controller;
 
 import com.library.loanMicroservice.dto.AuthorDto;
 import com.library.loanMicroservice.model.Author;
-import com.library.loanMicroservice.repository.AuthorRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +23,11 @@ public class AuthorController {
         Author saved = this.authorService.createAuthor(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Author> updateAuthor(@PathVariable Long id, @RequestBody @Valid AuthorDto dto){
+        Author updated = this.authorService.updateAuthor(id, dto);
+        return ResponseEntity.ok(updated);
 
     @GetMapping("/{id}")
     public ResponseEntity<Author> getAuthor(@PathVariable("id") Long id) {
