@@ -3,14 +3,20 @@ package com.library.loanMicroservice.dto;
 import java.time.OffsetDateTime;
 
 import jakarta.validation.constraints.NotBlank;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 
 public class AuthorDto {
 
     @NotBlank
     private String name;
-
-    private OffsetDateTime birthDate;
+  
+    @NotNull
+    private LocalDate birthDate;
 
     public @NotBlank String getName() {
         return name;
@@ -20,11 +26,11 @@ public class AuthorDto {
         this.name = name;
     }
 
-    public OffsetDateTime getBirthDate() {
+    public @NotNull LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(OffsetDateTime birthDate) {
+    public void setBirthDate(@NotNull LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 }

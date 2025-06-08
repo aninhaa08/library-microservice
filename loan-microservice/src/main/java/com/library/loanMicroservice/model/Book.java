@@ -2,7 +2,6 @@ package com.library.loanMicroservice.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 @Table (name = "books")

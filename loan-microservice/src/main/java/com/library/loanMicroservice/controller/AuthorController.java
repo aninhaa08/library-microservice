@@ -39,7 +39,9 @@ public class AuthorController {
             @ApiResponse(responseCode = "409", description = "Autor já existente"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
+  
     @PostMapping("/postAuthor")
+    @PostMapping
     public ResponseEntity<Author> createAuthor(@RequestBody @Valid AuthorDto dto){
         Author saved = this.authorService.createAuthor(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
@@ -63,11 +65,20 @@ public class AuthorController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @GetMapping("/getAuthor/{id}")
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Author> updateAuthor(@PathVariable Long id, @RequestBody @Valid AuthorDto dto){
+        Author updated = this.authorService.updateAuthor(id, dto);
+        return ResponseEntity.ok(updated);
+
+    @GetMapping("/{id}")
+
     public ResponseEntity<Author> getAuthor(@PathVariable("id") Long id) {
         return authorService.getAuthorById(id)
                 .map(ResponseEntity::ok)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor não encontrado"));
     }
+
 
     @Operation(summary = "Atualiza um autor existente por ID")
     @ApiResponses(value = {
@@ -90,6 +101,9 @@ public class AuthorController {
     })
     @DeleteMapping("/deleteAuthor/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         return ResponseEntity.ok().body(authorService.deleteById(id));
     }
 }

@@ -17,17 +17,6 @@ public class Genre {
     @Schema(description = "Nome do gênero", example = "Romance")
     private String name;
 
-    @OneToMany(mappedBy = "genre")
-    private List<Book> books;
-
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
-
     public Long getId() {
         return id;
     }
