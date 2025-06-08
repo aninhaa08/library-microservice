@@ -1,7 +1,6 @@
 package com.library.loanMicroservice.model;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 @Table (name = "books")
