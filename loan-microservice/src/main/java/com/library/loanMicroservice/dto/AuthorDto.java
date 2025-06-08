@@ -1,5 +1,8 @@
 package com.library.loanMicroservice.dto;
 
+import java.time.OffsetDateTime;
+
+import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
@@ -11,7 +14,7 @@ public class AuthorDto {
 
     @NotBlank
     private String name;
-
+  
     @NotNull
     private LocalDate birthDate;
 

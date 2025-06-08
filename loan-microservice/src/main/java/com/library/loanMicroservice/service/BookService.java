@@ -20,6 +20,10 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
+    public List<Book> findByGenreName(String genre) {
+        return bookRepository.findByGenre_NameIgnoreCase(genre);
+    }
+
     public BookDTO getBookById(Long id) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro não encontrado."));

@@ -1,5 +1,6 @@
 package com.library.loanMicroservice.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.library.loanMicroservice.dto.AuthorDto;
@@ -18,11 +19,20 @@ public class AuthorService {
     private AuthorRepository authorRepository;
 
     public Author createAuthor(AuthorDto dto){
-        Author author = new Author();
+        Author author = new Author(null, null, null);
 
         author.setName(dto.getName());
-        author.setBirthDate(dto.getBirthDate());
+        author.setBirthDate(dto.getBirthDate().toLocalDate());
         return authorRepository.save(author);
+    }
+
+    public List<Author> getAuthor() {
+        return authorRepository.findAll();
+
+    }
+
+    public Optional<Author> getAuthorById(Long id) {
+        return this.authorRepository.findById(id);
     }
 
     public Author updateAuthor(Long id, AuthorDto dto){
@@ -31,7 +41,6 @@ public class AuthorService {
 
         author.setName(dto.getName());
         author.setBirthDate(dto.getBirthDate());
-
         return authorRepository.save(author);
     }
 
@@ -44,6 +53,7 @@ public class AuthorService {
         if (!author.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor não encontrado.");
         }
+        authorRepository.delete(author.get());
         return "Autor deletado.";
     }
 }

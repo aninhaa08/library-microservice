@@ -1,26 +1,33 @@
 package com.library.loanMicroservice.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 @Entity
 @Table (name = "books")
+@Schema(description = "Representa um livro")
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "ID do livro", example = "1")
     private Long id;
 
+    @Schema(description = "Título do livro", example = "Dom Casmurro")
     private String title;
 
     @Column(name = "year_publication")
+    @Schema(description = "Ano de publicação do livro", example = "1899")
     private Integer year_publication;
 
     @ManyToOne
     @JoinColumn(name = "author_id")
+    @Schema(description = "Nome do autor do livro", example = "Machado de Assis")
     private Author author;
 
     @ManyToOne
     @JoinColumn(name = "genre_id")
+    @Schema(description = "Gênero do livro", example = "Romance")
     private Genre genre;
 
     public Long getId() {
