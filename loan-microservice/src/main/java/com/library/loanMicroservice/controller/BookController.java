@@ -3,7 +3,6 @@ package com.library.loanMicroservice.controller;
 import com.library.loanMicroservice.model.Book;
 import com.library.loanMicroservice.repository.BookRepository;
 import com.library.loanMicroservice.dto.BookDTO;
-import com.library.loanMicroservice.model.Book;
 import com.library.loanMicroservice.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -36,6 +35,7 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Livro não encontrado"),
             @ApiResponse(responseCode = "400", description = "Requisição inválida")
     })
+
     @GetMapping("/getBook/{genre}")
     public ResponseEntity<List<Book>> getBooksByGenre(@PathVariable String genre) {
         List<Book> books = bookService.findByGenreName(genre);
@@ -52,11 +52,11 @@ public class BookController {
             @ApiResponse(responseCode = "400", description = "ID inválido fornecido"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
+
     @GetMapping("/getBook/{id}")
-    public ResponseEntity<Book> getAuthor(@PathVariable("id") Long id) {
-        return bookService.getBookById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<BookDTO> getBook(@PathVariable Long id) {
+        BookDTO book = bookService.getBookById(id);
+        return ResponseEntity.ok(book);
     }
 
     @Operation(summary = "Atualizar livro pelo ID", description = "Atualiza um livro existente pelo seu ID")
@@ -65,6 +65,7 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Livro não encontrado"),
             @ApiResponse(responseCode = "400", description = "Requisição inválida")
     })
+
     @PutMapping("/putBook/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
         Optional<Book> optionalBook = bookRepository.findById(id);
@@ -87,14 +88,8 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Livro não encontrado"),
             @ApiResponse(responseCode = "400", description = "ID inválido")
     })
-    @DeleteMapping("/deleteBook/{id}")
-    @GetMapping("/{id}")
-    public ResponseEntity<BookDTO> getBook(@PathVariable Long id) {
-        BookDTO book = bookService.getBookById(id);
-        return ResponseEntity.ok(book);
-    }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/deleteBook/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
         return ResponseEntity.ok().body(this.bookService.deleteById(id));
     }

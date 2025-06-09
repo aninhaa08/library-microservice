@@ -7,9 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-public interface BookRepository extends JpaRepository<Book, Long> {
-    List<Book> findByGenre_NameIgnoreCase(String name);
-
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
   
@@ -17,4 +14,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @NonNull
     Optional<Book> findById(@NonNull Long id);
 
+    List<Book> findByGenre_NameIgnoreCase(String name);
 }

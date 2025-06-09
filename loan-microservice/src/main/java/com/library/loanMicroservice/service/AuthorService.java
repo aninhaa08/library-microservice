@@ -22,13 +22,12 @@ public class AuthorService {
         Author author = new Author(null, null, null);
 
         author.setName(dto.getName());
-        author.setBirthDate(dto.getBirthDate().toLocalDate());
+        author.setBirthDate(dto.getBirthDate());
         return authorRepository.save(author);
     }
 
     public List<Author> getAuthor() {
         return authorRepository.findAll();
-
     }
 
     public Optional<Author> getAuthorById(Long id) {
@@ -42,10 +41,6 @@ public class AuthorService {
         author.setName(dto.getName());
         author.setBirthDate(dto.getBirthDate());
         return authorRepository.save(author);
-    }
-
-    public Optional<Author> getAuthorById(Long id) {
-        return this.authorRepository.findById(id);
     }
 
     public String deleteById(Long id) {
