@@ -1,5 +1,6 @@
 package com.library.loanMicroservice.service;
 
+import com.library.loanMicroservice.dto.BookDTO;
 import com.library.loanMicroservice.model.Book;
 import com.library.loanMicroservice.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,17 @@ public class BookService {
         return bookRepository.findByGenre_NameIgnoreCase(genre);
     }
 
-    public Optional<Book> getBookById(Long id) {
-        return this.bookRepository.findById(id);
+    public BookDTO getBookById(Long id) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro não encontrado."));
+
+        return BookDTO.builder()
+                .id(book.getId())
+                .title(book.getTitle())
+                .year_publication(book.getYear_publication())
+                .authorName(book.getAuthor().getName())
+                .genre(book.getGenre())
+                .build();
     }
 
     public String deleteById(Integer id) {

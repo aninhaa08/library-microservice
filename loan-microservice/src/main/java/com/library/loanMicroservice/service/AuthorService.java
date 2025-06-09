@@ -23,7 +23,7 @@ public class AuthorService {
         Author author = new Author(null, null, null);
 
         author.setName(dto.getName());
-        author.setBirthDate(dto.getBirthDate().toLocalDate());
+        author.setBirthDate(dto.getBirthDate());
         return authorRepository.save(author);
     }
 
@@ -41,7 +41,7 @@ public class AuthorService {
                 .orElseThrow(() -> new EntityNotFoundException("Autor de ID: " + id + " não encontrado."));
 
         author.setName(dto.getName());
-        author.setBirthDate(dto.getBirthDate().toLocalDate());
+        author.setBirthDate(dto.getBirthDate());
 
         return authorRepository.save(author);
     }

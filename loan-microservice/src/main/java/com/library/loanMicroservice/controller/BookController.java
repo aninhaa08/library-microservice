@@ -1,5 +1,6 @@
 package com.library.loanMicroservice.controller;
 
+import com.library.loanMicroservice.dto.BookDTO;
 import com.library.loanMicroservice.model.Book;
 import com.library.loanMicroservice.repository.BookRepository;
 import com.library.loanMicroservice.service.BookService;
@@ -86,6 +87,13 @@ public class BookController {
             @ApiResponse(responseCode = "400", description = "ID inválido")
     })
     @DeleteMapping("/deleteBook/{id}")
+    @GetMapping("/{id}")
+    public ResponseEntity<BookDTO> getBook(@PathVariable Long id) {
+        BookDTO book = bookService.getBookById(id);
+        return ResponseEntity.ok(book);
+    }
+
+    @DeleteMapping("{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
         return ResponseEntity.ok().body(this.bookService.deleteById(id));
     }

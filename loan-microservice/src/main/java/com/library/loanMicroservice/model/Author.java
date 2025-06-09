@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.util.List;
 
 @Entity
@@ -21,7 +20,6 @@ public class Author {
     private String name;
 
     @Column(name = "birth_date")
-    @Schema(description = "Data de nascimento do autor", example = "OffsetDateTime.parse(\"1839-06-21T00:00:00-03:00\")")
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "author")
@@ -60,10 +58,6 @@ public class Author {
         this.birthDate = birthDate;
     }
 
-    public OffsetDateTime getDataNascimento(OffsetDateTime dataNascimento) {
-        return dataNascimento;
-    }
-
     public List<Book> getBooks() {
         return books;
     }
@@ -71,6 +65,5 @@ public class Author {
     public void setBooks(List<Book> books) {
         this.books = books;
     }
-
 
 }
