@@ -27,7 +27,8 @@ public class GenreController {
             @ApiResponse(responseCode = "400", description = "ID inválido")
     })
     @DeleteMapping("/deleteGenre/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok().body(genreService.deleteById(id));
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+        genreService.deleteById(id);
+        return ResponseEntity.ok("Gênero deletado com sucesso.");
     }
 }

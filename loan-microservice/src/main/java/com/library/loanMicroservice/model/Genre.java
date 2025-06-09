@@ -2,6 +2,8 @@ package com.library.loanMicroservice.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,6 +21,13 @@ public class Genre {
 
     @OneToMany(mappedBy = "genre")
     private List<Book> books;
+
+    public Genre(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Genre() {}
 
     public List<Book> getBooks() {
         return books;

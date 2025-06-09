@@ -34,7 +34,7 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Livro não encontrado"),
             @ApiResponse(responseCode = "400", description = "Requisição inválida")
     })
-    @GetMapping("/getBook/{genre}")
+    @GetMapping("/getBookGenre/{genre}")
     public ResponseEntity<List<Book>> getBooksByGenre(@PathVariable String genre) {
         List<Book> books = bookService.findByGenreName(genre);
         if (books.isEmpty()) {
@@ -50,7 +50,7 @@ public class BookController {
             @ApiResponse(responseCode = "400", description = "ID inválido fornecido"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
-    @GetMapping("/getBook/{id}")
+    @GetMapping("/getBookId/{id}")
     public ResponseEntity<Book> getAuthor(@PathVariable("id") Long id) {
         return bookService.getBookById(id)
                 .map(ResponseEntity::ok)

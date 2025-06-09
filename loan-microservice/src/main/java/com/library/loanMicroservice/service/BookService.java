@@ -33,6 +33,7 @@ public class BookService {
         if (!book.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro não encontrado.");
         }
+        bookRepository.delete(book.get());
         return "Livro deletado.";
     }
 }

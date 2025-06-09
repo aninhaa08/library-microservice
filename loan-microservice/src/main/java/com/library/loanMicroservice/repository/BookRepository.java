@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByGenre_NameIgnoreCase(String name);
+    List<Book> findByGenreId(Long genreId);
 }

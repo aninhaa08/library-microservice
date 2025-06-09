@@ -1,8 +1,11 @@
 package com.library.loanMicroservice.service;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.library.loanMicroservice.model.Book;
 import com.library.loanMicroservice.model.Genre;
+import com.library.loanMicroservice.repository.BookRepository;
 import com.library.loanMicroservice.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,11 +18,15 @@ public class GenreService {
     @Autowired
     private GenreRepository genreRepository;
 
-    public String deleteById(Integer id) {
-        Optional<Genre> genre = genreRepository.findById(Long.valueOf(id));
-        if (!genre.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Gênero não encontrado.");
+    @Autowired
+    private BookRepository bookRepository;
+
+    public void deleteById(Long idExcluido) {
+        List<Book> books = bookRepository.findByGenreId(idExcluido);
+        for (Book book : books) {
+            book.setGenre(null);
         }
-        return "Gênero excluído.";
+        bookRepository.saveAll(books);
+        genreRepository.deleteById(idExcluido);
     }
 }

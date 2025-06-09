@@ -31,6 +31,16 @@ public class Book {
     @Schema(description = "Gênero do livro", example = "Romance")
     private Genre genre;
 
+    public Book(Long id, String title, Integer year_publication, Author author, Genre genre) {
+        this.id = id;
+        this.title = title;
+        this.year_publication = year_publication;
+        this.author = author;
+        this.genre = genre;
+    }
+
+    public Book() {}
+
     public Long getId() {
         return id;
     }
