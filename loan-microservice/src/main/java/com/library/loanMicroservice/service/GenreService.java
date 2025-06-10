@@ -3,8 +3,10 @@ package com.library.loanMicroservice.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.library.loanMicroservice.model.Book;
 import com.library.loanMicroservice.dto.GenreDto;
 import com.library.loanMicroservice.model.Genre;
+import com.library.loanMicroservice.repository.BookRepository;
 import com.library.loanMicroservice.repository.GenreRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class GenreService {
 
     @Autowired
     private GenreRepository genreRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     public List<Genre> getAll() {
         return genreRepository.findAll();

@@ -1,8 +1,8 @@
 package com.library.loanMicroservice.controller;
 
+import com.library.loanMicroservice.dto.BookDTO;
 import com.library.loanMicroservice.model.Book;
 import com.library.loanMicroservice.repository.BookRepository;
-import com.library.loanMicroservice.dto.BookDTO;
 import com.library.loanMicroservice.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -50,7 +50,7 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Livro não encontrado"),
             @ApiResponse(responseCode = "400", description = "Requisição inválida")
     })
-
+  
     @GetMapping("/genre/{genre}")
     public ResponseEntity<List<Book>> getBooksByGenre(@PathVariable String genre) {
         List<Book> books = bookService.findByGenreName(genre);

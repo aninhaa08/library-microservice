@@ -4,6 +4,10 @@ import com.library.loanMicroservice.model.Genre;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.http.ResponseEntity;
+
+import java.util.Optional;
+
 import lombok.NoArgsConstructor;
 
 @Data

@@ -3,6 +3,10 @@ package com.library.loanMicroservice.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 @Entity
 @Table (name = "genres")
 @Schema(description = "Representa um gênero")
@@ -15,6 +19,24 @@ public class Genre {
 
     @Schema(description = "Nome do gênero", example = "Romance")
     private String name;
+
+    @OneToMany(mappedBy = "genre")
+    private List<Book> books;
+
+    public Genre(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Genre() {}
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
 
     public Long getId() {
         return id;
