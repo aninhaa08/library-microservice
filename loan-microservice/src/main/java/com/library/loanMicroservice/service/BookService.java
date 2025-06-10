@@ -43,14 +43,12 @@ public class BookService {
         Genre genre = genreRepository.findByName(dto.getGenre().getName())
                 .orElseThrow(() -> new EntityNotFoundException("Gênero não encontrado"));
 
-        Book book = Book.builder() //eu errando aqui e vc nem pra avisar -- eu errando junto
+        Book book = Book.builder()
                 .title(dto.getTitle())
                 .author(author)
                 .genre(genre)
                 .year_publication(dto.getYear_publication())
-                .build(); // o bug aqui ó, tinha q converter book pra dto, eu tava convertendo errado rsrs
-        //nn acredito que era isso kkkk
-        //falei q era erro de tipo, da pra transformar com map dps, -- precisa? nao, opcional prft ent
+                .build();
 
         Book savedBook = bookRepository.save(book);
 
