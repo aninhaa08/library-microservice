@@ -29,7 +29,6 @@ public class AuthorService {
 
     public List<Author> getAuthor() {
         return authorRepository.findAll();
-
     }
 
     public Optional<Author> getAuthorById(Long id) {
@@ -46,8 +45,8 @@ public class AuthorService {
         return authorRepository.save(author);
     }
 
-    public String deleteById(Integer id) {
-        Optional<Author> author = authorRepository.findById(Long.valueOf(id));
+    public String deleteById(Long id) {
+        Optional<Author> author = authorRepository.findById(id);
         if (!author.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor não encontrado.");
         }

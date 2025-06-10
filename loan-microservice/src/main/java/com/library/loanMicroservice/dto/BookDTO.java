@@ -8,8 +8,11 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
+import lombok.NoArgsConstructor;
+
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class BookDTO {
     private Long id;

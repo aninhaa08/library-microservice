@@ -1,8 +1,11 @@
 package com.library.loanMicroservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import lombok.Builder;
 
+@Builder
 @Entity
 @Table (name = "books")
 @Schema(description = "Representa um livro")
@@ -22,6 +25,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "author_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @Schema(description = "Nome do autor do livro", example = "Machado de Assis")
     private Author author;
 
@@ -30,6 +34,9 @@ public class Book {
     @Schema(description = "Gênero do livro", example = "Romance")
     private Genre genre;
 
+    public Book() {
+    }
+
     public Book(Long id, String title, Integer year_publication, Author author, Genre genre) {
         this.id = id;
         this.title = title;
@@ -37,8 +44,6 @@ public class Book {
         this.author = author;
         this.genre = genre;
     }
-
-    public Book() {}
 
     public Long getId() {
         return id;

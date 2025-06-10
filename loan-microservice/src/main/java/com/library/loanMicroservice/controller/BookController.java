@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +30,28 @@ public class BookController {
         this.bookRepository = bookRepository;
     }
 
+    @Operation(summary = "Cria um novo livro")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Livro criado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos para o livro"),
+            @ApiResponse(responseCode = "409", description = "Livro já existente"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+
+    @PostMapping
+    public ResponseEntity<BookDTO> createBook(@RequestBody @Valid BookDTO dto) {
+        BookDTO createdBook = bookService.createBook(dto);
+        return ResponseEntity.status(201).body(createdBook);
+    }
+
     @Operation(summary = "Encontrar livro pelo gênero", description = "Busca um livro existente pelo seu gênero")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Livro encontrado com sucesso"),
             @ApiResponse(responseCode = "404", description = "Livro não encontrado"),
             @ApiResponse(responseCode = "400", description = "Requisição inválida")
     })
-    @GetMapping("/getBookGenre/{genre}")
+  
+    @GetMapping("/genre/{genre}")
     public ResponseEntity<List<Book>> getBooksByGenre(@PathVariable String genre) {
         List<Book> books = bookService.findByGenreName(genre);
         if (books.isEmpty()) {
@@ -51,11 +67,11 @@ public class BookController {
             @ApiResponse(responseCode = "400", description = "ID inválido fornecido"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
-    @GetMapping("/getBookId/{id}")
-    public ResponseEntity<Book> getAuthor(@PathVariable("id") Long id) {
-        return bookService.getBookById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BookDTO> getBook(@PathVariable Long id) {
+        BookDTO book = bookService.getBookById(id);
+        return ResponseEntity.ok(book);
     }
 
     @Operation(summary = "Atualizar livro pelo ID", description = "Atualiza um livro existente pelo seu ID")
@@ -64,7 +80,8 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Livro não encontrado"),
             @ApiResponse(responseCode = "400", description = "Requisição inválida")
     })
-    @PutMapping("/putBook/{id}")
+
+    @PutMapping("/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
         Optional<Book> optionalBook = bookRepository.findById(id);
 
@@ -86,15 +103,9 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Livro não encontrado"),
             @ApiResponse(responseCode = "400", description = "ID inválido")
     })
-    @DeleteMapping("/deleteBook/{id}")
-    @GetMapping("/{id}")
-    public ResponseEntity<BookDTO> getBook(@PathVariable Long id) {
-        BookDTO book = bookService.getBookById(id);
-        return ResponseEntity.ok(book);
-    }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok().body(this.bookService.deleteById(id));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(bookService.deleteById(id));
     }
 }

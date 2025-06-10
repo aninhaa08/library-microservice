@@ -26,12 +26,6 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
-    private final AuthorRepository authorRepository;
-
-    public AuthorController(AuthorRepository authorRepository) {
-        this.authorRepository = authorRepository;
-    }
-
     @Operation(summary = "Cria um novo autor")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Autor criado com sucesso"),
@@ -39,7 +33,8 @@ public class AuthorController {
             @ApiResponse(responseCode = "409", description = "Autor já existente"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
-    @PostMapping("/postAuthor")
+  
+    @PostMapping
     public ResponseEntity<Author> createAuthor(@RequestBody @Valid AuthorDto dto){
         Author saved = this.authorService.createAuthor(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
@@ -50,7 +45,8 @@ public class AuthorController {
             @ApiResponse(responseCode = "200", description = "Autores retornados com sucesso"),
             @ApiResponse(responseCode = "204", description = "Nenhum autor encontrado")
     })
-    @GetMapping("/getAuthors")
+
+    @GetMapping
     public List<Author> getAllAuthors() {
         return authorService.getAuthor();
     }
@@ -62,7 +58,8 @@ public class AuthorController {
             @ApiResponse(responseCode = "400", description = "ID inválido fornecido"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
-    @GetMapping("/getAuthor/{id}")
+
+    @GetMapping("/{id}")
     public ResponseEntity<Author> getAuthor(@PathVariable("id") Long id) {
         return authorService.getAuthorById(id)
                 .map(ResponseEntity::ok)
@@ -76,7 +73,8 @@ public class AuthorController {
             @ApiResponse(responseCode = "404", description = "Autor não encontrado"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
-    @PutMapping("/putAuthor/{id}")
+
+    @PutMapping("/{id}")
     public ResponseEntity<Author> updateAuthor(@PathVariable Long id, @RequestBody @Valid AuthorDto dto){
         Author updated = this.authorService.updateAuthor(id, dto);
         return ResponseEntity.ok(updated);
@@ -88,8 +86,9 @@ public class AuthorController {
             @ApiResponse(responseCode = "404", description = "Autor não encontrado"),
             @ApiResponse(responseCode = "400", description = "ID inválido")
     })
-    @DeleteMapping("/deleteAuthor/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         return ResponseEntity.ok().body(authorService.deleteById(id));
     }
 }

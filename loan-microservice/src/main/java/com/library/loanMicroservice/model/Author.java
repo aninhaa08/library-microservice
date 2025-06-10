@@ -1,5 +1,6 @@
 package com.library.loanMicroservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
@@ -23,6 +24,7 @@ public class Author {
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "author")
+    @JsonIgnore
     @Schema(description = "Lista de livros escritos pelo autor", example = "[{\"title\": \"Dom Casmurro\"}]")
     private List<Book> books;
 

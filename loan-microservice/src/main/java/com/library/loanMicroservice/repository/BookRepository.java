@@ -9,11 +9,11 @@ import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-    List<Book> findByGenre_NameIgnoreCase(String name);
-
     List<Book> findByGenreId(Long genreId);
-
+  
     @Override
     @NonNull
     Optional<Book> findById(@NonNull Long id);
+
+    List<Book> findByGenre_NameIgnoreCase(String name);
 }
