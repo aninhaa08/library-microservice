@@ -1,8 +1,13 @@
 package com.library.loanMicroservice.service;
 
 import com.library.loanMicroservice.dto.BookDTO;
+import com.library.loanMicroservice.model.Author;
 import com.library.loanMicroservice.model.Book;
+import com.library.loanMicroservice.model.Genre;
+import com.library.loanMicroservice.repository.AuthorRepository;
 import com.library.loanMicroservice.repository.BookRepository;
+import com.library.loanMicroservice.repository.GenreRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +24,33 @@ public class BookService {
     @Autowired
     private final BookRepository bookRepository;
 
-    public BookService(BookRepository bookRepository){
+    @Autowired
+    private final AuthorRepository authorRepository;
+
+    @Autowired
+    private final GenreRepository genreRepository;
+
+    public Book createBook(BookDTO dto) {
+        Author author = authorRepository.findById(dto.id())
+                .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"));
+
+        Genre genre = genreRepository.findById(dto.id())
+                .orElseThrow(() -> new EntityNotFoundException("Gênero não encontrado"));
+
+        return bookRepository.save(
+                Book.builder()
+                        .title(dto.getTitle())
+                        .author(author)
+                        .genre(genre)
+                        .yearPublication(dto.getYear_publication())
+                        .build()
+        );
+    }
+
+    public BookService(BookRepository bookRepository, AuthorRepository authorRepository, GenreRepository genreRepository){
         this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
+        this.genreRepository = genreRepository;
     }
 
     public List<Book> findByGenreName(String genre) {

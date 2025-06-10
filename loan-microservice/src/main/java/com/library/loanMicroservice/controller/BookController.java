@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,12 @@ public class BookController {
     @Autowired
     private final BookService bookService;
     private final BookRepository bookRepository;
+
+    @PostMapping
+    public ResponseEntity<Book> createBook(@RequestBody @Valid BookDTO dto) {
+        Book createdBook = bookService.createBook(dto);
+        return ResponseEntity.status(201).body(createdBook);
+    }
 
     public BookController(BookService bookService, BookRepository bookRepository) {
         this.bookService = bookService;
