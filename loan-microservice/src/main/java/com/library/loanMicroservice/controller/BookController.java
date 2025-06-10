@@ -51,7 +51,7 @@ public class BookController {
             @ApiResponse(responseCode = "400", description = "Requisição inválida")
     })
 
-    @GetMapping("/{genre}")
+    @GetMapping("/genre/{genre}")
     public ResponseEntity<List<Book>> getBooksByGenre(@PathVariable String genre) {
         List<Book> books = bookService.findByGenreName(genre);
         if (books.isEmpty()) {

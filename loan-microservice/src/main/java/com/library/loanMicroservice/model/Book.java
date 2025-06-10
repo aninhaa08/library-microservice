@@ -1,5 +1,6 @@
 package com.library.loanMicroservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -24,6 +25,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "author_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @Schema(description = "Nome do autor do livro", example = "Machado de Assis")
     private Author author;
 
