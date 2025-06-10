@@ -2,7 +2,9 @@ package com.library.loanMicroservice.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import lombok.Builder;
 
+@Builder
 @Entity
 @Table (name = "books")
 @Schema(description = "Representa um livro")
@@ -29,6 +31,17 @@ public class Book {
     @JoinColumn(name = "genre_id")
     @Schema(description = "Gênero do livro", example = "Romance")
     private Genre genre;
+
+    public Book() {
+    }
+
+    public Book(Long id, String title, Integer year_publication, Author author, Genre genre) {
+        this.id = id;
+        this.title = title;
+        this.year_publication = year_publication;
+        this.author = author;
+        this.genre = genre;
+    }
 
     public Long getId() {
         return id;

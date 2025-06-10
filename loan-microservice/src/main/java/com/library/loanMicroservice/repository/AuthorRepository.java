@@ -13,4 +13,6 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Override
     @NonNull
     Optional<Author> findById(@NonNull Long id);
+
+    Optional<Author> findByName(String name);
 }
