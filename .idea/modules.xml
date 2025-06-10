@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/loan-microservice.iml" filepath="$PROJECT_DIR$/.idea/loan-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/library-microservice.iml" filepath="$PROJECT_DIR$/.idea/library-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loan-microservice/loan-microservice.iml" filepath="$PROJECT_DIR$/loan-microservice/loan-microservice.iml" />
     </modules>
   </component>
 </project>
