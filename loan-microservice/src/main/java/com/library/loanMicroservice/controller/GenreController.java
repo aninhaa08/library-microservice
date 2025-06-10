@@ -1,5 +1,8 @@
 package com.library.loanMicroservice.controller;
 
+import com.library.loanMicroservice.dto.AuthorDto;
+import com.library.loanMicroservice.dto.GenreDto;
+import com.library.loanMicroservice.model.Author;
 import com.library.loanMicroservice.model.Genre;
 import com.library.loanMicroservice.repository.GenreRepository;
 import com.library.loanMicroservice.service.GenreService;
@@ -11,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,38 +39,55 @@ public class GenreController {
     @Autowired
     private GenreRepository genreRepository;
 
-    @Operation(summary = "Excluir gênero por ID", description = "Exclui um gênero existente pelo seu ID")
+    @Operation(summary = "Cria um novo gênero")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Gênero deletado com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Gênero não encontrado"),
-            @ApiResponse(responseCode = "400", description = "ID inválido")
+            @ApiResponse(responseCode = "201", description = "Gênero criado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos para o gênero"),
+            @ApiResponse(responseCode = "409", description = "Gênero já existente"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
 
-    @DeleteMapping("/deleteGenre/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok().body(genreService.deleteById(id));
+    @PostMapping
+    public ResponseEntity<Genre> create(@RequestBody @Valid GenreDto dto){
+        Genre saved = this.genreService.create(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
-    
+    @Operation(summary = "Exibir todos os gêneros", description = "Exibe a lista de gêneros cadastrados")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Gêneros retornados com sucesso"),
+            @ApiResponse(responseCode = "204", description = "Nenhum gênero encontrado")
+    })
+
     @GetMapping
-    public List<Genre> getAll() {
-        return genreRepository.findAll();
+    public ResponseEntity<List<Genre>> getAll() {
+        return ResponseEntity.ok(genreService.getAll());
     }
+
+    @Operation(summary = "Busca um gênero existente por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Gênero encontrado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Gênero não encontrado"),
+            @ApiResponse(responseCode = "400", description = "ID inválido fornecido"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
 
     @GetMapping("/{id}")
-    public Genre getById(@PathVariable Long id) {
-        return genreRepository.findById(id)
-             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Gênero não encontrado."));
+    public ResponseEntity<Genre> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(genreService.getById(id));
     }
 
-    @PostMapping
-    public ResponseEntity<Genre> create(@RequestBody Genre genre) {
-        System.out.println(genre);
-        return new ResponseEntity<>(this.genreRepository.save(genre), HttpStatus.CREATED);
-    }
+
+    @Operation(summary = "Atualiza um gênero existente por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Gênero atualizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos para o gênero"),
+            @ApiResponse(responseCode = "404", description = "Gênero não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
 
     @PutMapping("/{id}")
-    public ResponseEntity<Genre> update(@PathVariable Long id, @RequestBody Genre generoAtualizado) {
+    public ResponseEntity<Genre> update(@PathVariable Long id, @RequestBody @Valid GenreDto dto) {
         Optional<Genre> optionalGenero = genreRepository.findById(id);
 
         if (!optionalGenero.isPresent()) {
@@ -74,10 +95,22 @@ public class GenreController {
         }
 
         Genre genero = optionalGenero.get();
-        genero.setName(generoAtualizado.getName());
+        genero.setName(dto.getName());
 
         genreRepository.save(genero);
 
         return ResponseEntity.ok(genero);
+    }
+
+    @Operation(summary = "Excluir gênero por ID", description = "Exclui um gênero existente pelo seu ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Gênero deletado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Gênero não encontrado"),
+            @ApiResponse(responseCode = "400", description = "ID inválido")
+    })
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(genreService.deleteById(id));
     }
 }
