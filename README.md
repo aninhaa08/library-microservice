@@ -142,11 +142,11 @@ feat-cadastro-livros
 
 | Nome Completo                            | Função/Responsabilidades       |
 |------------------------------------------|--------------------------------|
-| Ana Carolina Souto Miranda               | ...                            |
-| Caio Juhasz Danjó                        | ...                            |
-| Felipe Cruz da Silva Santos              | ...                            |
-| Lívia Gabriela Lana Antas                | ...                            |
-| Maria Eduarda Loreta Silva Santos        | ...                            |
-| Maria Eduarda Santana Marques            | ...                            |
+| Ana Carolina Souto Miranda               | Estrutura da aplicação, configuração do banco de dados (Postgres) e criação das rotas "Put Authors/:id" e "Post Authors"                             |
+| Caio Juhasz Danjó                        | Configuração do Swagger, realização dos testes unitários e criação das rotas "Put Books/:id" e "Get Authors"                          |
+| Felipe Cruz da Silva Santos              | Criação das rotas "Get Books/:genre" e "Get Authors/:books"                          |
+| Lívia Gabriela Lana Antas                | Criação das rotas "Delete Genres/:id", "Put Genres/:id", "Post Genres", "Get Genres/:id", "Get Genres", "Delete Genres/:id", "Delete Authors/:id", "Delete Books/:id"                           |
+| Maria Eduarda Loreta Silva Santos        | Criação das rotas "Get Books" e "Post Books"                         |
+| Maria Eduarda Santana Marques            | Criação das rotas "Get Books/:id" e "Get Authors/:id"                          |
 
 
