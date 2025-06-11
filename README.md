@@ -142,11 +142,11 @@ feat-cadastro-livros
 
 | Nome Completo                            | Função/Responsabilidades       |
 |------------------------------------------|--------------------------------|
-| Ana Carolina Souto Miranda               | Estrutura da aplicação, configuração do banco de dados (Postgres) e criação das rotas "Put Authors/:id" e "Post Authors"                             |
-| Caio Juhasz Danjó                        | Configuração do Swagger, realização dos testes unitários e criação das rotas "Put Books/:id" e "Get Authors"                          |
-| Felipe Cruz da Silva Santos              | Criação das rotas "Get Books/:genre" e "Get Authors/:books"                          |
-| Lívia Gabriela Lana Antas                | Criação das rotas "Delete Genres/:id", "Put Genres/:id", "Post Genres", "Get Genres/:id", "Get Genres", "Delete Genres/:id", "Delete Authors/:id", "Delete Books/:id"                           |
-| Maria Eduarda Loreta Silva Santos        | Criação das rotas "Get Books" e "Post Books"                         |
-| Maria Eduarda Santana Marques            | Criação das rotas "Get Books/:id" e "Get Authors/:id"                          |
+| Ana Carolina Souto Miranda               | Estrutura da aplicação, configuração do banco de dados (Postgres), upload da API e criação das rotas "Put Authors/:id" e "Post Authors"                                                                                                                                                                   |
+| Caio Juhasz Danjó                        | Configuração do Swagger, realização dos testes unitários e criação das rotas "Put Books/:id" e "Get Authors"                                                                                                                                                                                              |
+| Felipe Cruz da Silva Santos              | Criação das rotas "Get Books/:genre" e "Get Authors/:books"                                                                   |
+| Lívia Gabriela Lana Antas                | Configuração do Banco de Dados H2, configuração do docker e criação das rotas "Delete Genres/:id", "Put Genres/:id", "Post Genres", "Get Genres/:id", "Get Genres", "Delete Genres/:id", "Delete Authors/:id", "Delete Books/:id"                                                                     |
+| Maria Eduarda Loreta Silva Santos        | Criação das rotas "Get Books" e "Post Books"                                                                                  |
+| Maria Eduarda Santana Marques            | Criação das rotas "Get Books/:id" e "Get Authors/:id"                                                                         |
 
 
