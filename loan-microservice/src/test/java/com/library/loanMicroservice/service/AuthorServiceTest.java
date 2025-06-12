@@ -7,6 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
+
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
@@ -32,7 +33,8 @@ public class AuthorServiceTest {
     private AuthorDto createAuthorDto(String name, OffsetDateTime birthDate) {
         AuthorDto dto = new AuthorDto();
         dto.setName(name);
-        dto.setBirthDate(birthDate);
+        // Converter OffsetDateTime para LocalDate para o AuthorDto
+        dto.setBirthDate(birthDate.toLocalDate());
         return dto;
     }
 
@@ -43,7 +45,7 @@ public class AuthorServiceTest {
     @Test
     void testCreateAuthor() {
         AuthorDto dto = createAuthorDto("Autor Teste", OffsetDateTime.parse("1980-01-01T00:00:00Z"));
-        Author savedAuthor = createAuthor(1L, "Autor Teste", dto.getBirthDate().toLocalDate());
+        Author savedAuthor = createAuthor(1L, "Autor Teste", dto.getBirthDate());
 
         when(authorRepository.save(any(Author.class))).thenReturn(savedAuthor);
 
@@ -52,7 +54,7 @@ public class AuthorServiceTest {
         assertThat(result).isNotNull();
         assertThat(result.getId()).isEqualTo(1L);
         assertThat(result.getName()).isEqualTo(dto.getName());
-        assertThat(result.getBirthDate()).isEqualTo(dto.getBirthDate().toLocalDate());
+        assertThat(result.getBirthDate()).isEqualTo(dto.getBirthDate());
 
         verify(authorRepository, times(1)).save(any(Author.class));
     }
@@ -60,8 +62,8 @@ public class AuthorServiceTest {
     @Test
     void testGetAuthor() {
         List<Author> authors = Arrays.asList(
-                createAuthor(1L, "Autor 1", LocalDate.of(1980,1,1)),
-                createAuthor(2L, "Autor 2", LocalDate.of(1990,5,5))
+                createAuthor(1L, "Autor 1", LocalDate.of(1980, 1, 1)),
+                createAuthor(2L, "Autor 2", LocalDate.of(1990, 5, 5))
         );
 
         when(authorRepository.findAll()).thenReturn(authors);
@@ -75,7 +77,7 @@ public class AuthorServiceTest {
 
     @Test
     void testGetAuthorByIdFound() {
-        Author author = createAuthor(1L, "Autor Teste", LocalDate.of(1980,1,1));
+        Author author = createAuthor(1L, "Autor Teste", LocalDate.of(1980, 1, 1));
         when(authorRepository.findById(1L)).thenReturn(Optional.of(author));
 
         Optional<Author> result = authorService.getAuthorById(1L);
@@ -100,17 +102,17 @@ public class AuthorServiceTest {
     @Test
     void testUpdateAuthorSuccess() {
         Long id = 1L;
-        Author existingAuthor = createAuthor(id, "Old Name", LocalDate.of(1970,1,1));
+        Author existingAuthor = createAuthor(id, "Old Name", LocalDate.of(1970, 1, 1));
         AuthorDto dto = createAuthorDto("New Name", OffsetDateTime.parse("1985-03-03T00:00:00Z"));
-        Author updatedAuthor = createAuthor(id, dto.getName(), dto.getBirthDate().toLocalDate());
+        Author updatedAuthor = createAuthor(id, dto.getName(), dto.getBirthDate());
 
         when(authorRepository.findById(id)).thenReturn(Optional.of(existingAuthor));
-        when(authorRepository.save(any(Author.class))).thenReturn(updatedAuthor);
+        when(authorRepository.save(existingAuthor)).thenReturn(updatedAuthor);
 
         Author result = authorService.updateAuthor(id, dto);
 
         assertThat(result.getName()).isEqualTo(dto.getName());
-        assertThat(result.getBirthDate()).isEqualTo(dto.getBirthDate().toLocalDate());
+        assertThat(result.getBirthDate()).isEqualTo(dto.getBirthDate());
 
         verify(authorRepository, times(1)).findById(id);
         verify(authorRepository, times(1)).save(existingAuthor);
@@ -134,12 +136,12 @@ public class AuthorServiceTest {
     @Test
     void testDeleteByIdSuccess() {
         Long id = 1L;
-        Author author = createAuthor(id, "Autor Teste", LocalDate.of(1980,1,1));
+        Author author = createAuthor(id, "Autor Teste", LocalDate.of(1980, 1, 1));
 
         when(authorRepository.findById(id)).thenReturn(Optional.of(author));
         doNothing().when(authorRepository).delete(author);
 
-        String result = authorService.deleteById(id.intValue());
+        String result = authorService.deleteById(id);
 
         assertThat(result).isEqualTo("Autor deletado.");
 
@@ -153,7 +155,7 @@ public class AuthorServiceTest {
 
         when(authorRepository.findById(id)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> authorService.deleteById(id.intValue()))
+        assertThatThrownBy(() -> authorService.deleteById(id))
                 .isInstanceOf(ResponseStatusException.class)
                 .hasMessageContaining("Autor não encontrado.");
 
