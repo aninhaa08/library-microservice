@@ -2,17 +2,16 @@ package com.library.loanMicroservice.dto;
 
 import java.time.OffsetDateTime;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
-
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-
+@Schema(description = "Representa um autor")
 public class AuthorDto {
 
     @NotBlank
+    @Schema(description = "Nome do autor", example = "Machado de Assis")
     private String name;
   
     @NotNull

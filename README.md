@@ -134,19 +134,19 @@ feat-cadastro-livros
 - Banco de dados: disponível via Docker e acessível em `localhost:5432`
 - Aplicação: rodando localmente via `localhost:8080`
 - Requisições via Insomnia/Postman e consultas via DBeaver
-
+- Swagger rodando em `http://localhost:8080/swagger-ui/index.html#/`
 
 ---
 
 ## 👥 Integrantes do Grupo e funções
 
-| Nome Completo                            | Função/Responsabilidades       |
-|------------------------------------------|--------------------------------|
-| Ana Carolina Souto Miranda               | Estrutura da aplicação, configuração do banco de dados (Postgres), upload da API e criação das rotas "Put Authors/:id" e "Post Authors"                                                                                                                                                                   |
-| Caio Juhasz Danjó                        | Configuração do Swagger, realização dos testes unitários e criação das rotas "Put Books/:id" e "Get Authors"                                                                                                                                                                                              |
-| Felipe Cruz da Silva Santos              | Criação das rotas "Get Books/:genre" e "Get Authors/:books"                                                                   |
-| Lívia Gabriela Lana Antas                | Configuração do Banco de Dados H2, configuração do docker e criação das rotas "Delete Genres/:id", "Put Genres/:id", "Post Genres", "Get Genres/:id", "Get Genres", "Delete Genres/:id", "Delete Authors/:id", "Delete Books/:id"                                                                     |
-| Maria Eduarda Loreta Silva Santos        | Criação das rotas "Get Books" e "Post Books"                                                                                  |
-| Maria Eduarda Santana Marques            | Criação das rotas "Get Books/:id" e "Get Authors/:id"                                                                         |
+| Nome Completo                            | Função/Responsabilidades                                                                                                                                                                                                                                |
+|------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Ana Carolina Souto Miranda               | Estrutura da aplicação, configuração do banco de dados (Postgres), configuração do docker (imagem do banco de dados), upload da API e criação das rotas "Put Authors/:id" e "Post Authors"                                                              |
+| Caio Juhasz Danjó                        | Configuração do Swagger, realização dos testes unitários e criação das rotas "Put Books/:id" e "Get Authors"                                                                                                                                            |
+| Felipe Cruz da Silva Santos              | Criação das rotas "Get Books/:genre" e "Get Authors/:books"                                                                                                                                                                                             |
+| Lívia Gabriela Lana Antas                | Configuração do Banco de Dados H2, configuração do docker (imagem da aplicação) e criação das rotas "Delete Genres/:id", "Put Genres/:id", "Post Genres", "Get Genres/:id", "Get Genres", "Delete Genres/:id", "Delete Authors/:id", "Delete Books/:id" |
+| Maria Eduarda Loreta Silva Santos        | Criação das rotas "Get Books" e "Post Books"                                                                                                                                                                                                            |
+| Maria Eduarda Santana Marques            | Criação das rotas "Get Books/:id" e "Get Authors/:id"                                                                                                                                                                                                   |
 
 

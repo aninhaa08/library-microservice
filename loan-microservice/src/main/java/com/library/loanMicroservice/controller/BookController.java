@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +50,10 @@ public class BookController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
 
-    @PostMapping
+    @PostMapping (
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public ResponseEntity<BookDTO> createBook(@RequestBody @Valid BookDTO dto) {
         BookDTO createdBook = bookService.createBook(dto);
         return ResponseEntity.status(201).body(createdBook);
