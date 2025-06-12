@@ -18,8 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AuthorControllerTest {
@@ -36,21 +35,8 @@ class AuthorControllerTest {
     }
 
     @Test
-    void shouldThrowNotFound_whenGetAuthorByIdNotFound() {
-        Long authorId = 1L;
-
-        when(authorService.getAuthorById(authorId))
-                .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Author not found"));
-
-        assertThrows(ResponseStatusException.class, () -> {
-            authorController.getAuthor(authorId);
-        });
-    }
-
-    @Test
     void testCreateAuthor_Success() {
         AuthorDto dto = new AuthorDto();
-
         Author author = new Author();
         author.setId(1L);
 
@@ -76,55 +62,61 @@ class AuthorControllerTest {
 
     @Test
     void testGetAuthor_Found() {
+        Long authorId = 1L;
         Author author = new Author();
-        author.setId(1L);
+        author.setId(authorId);
 
-        when(authorService.getAuthorById(1L)).thenReturn(Optional.of(author));
+        when(authorService.getAuthorById(authorId)).thenReturn(Optional.of(author));
 
-        ResponseEntity<Author> response = authorController.getAuthor(1L);
+        ResponseEntity<Author> response = authorController.getAuthor(authorId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(author, response.getBody());
-        verify(authorService).getAuthorById(1L);
+        verify(authorService).getAuthorById(authorId);
     }
 
     @Test
     void testGetAuthor_NotFound() {
-        when(authorService.getAuthorById(999L)).thenReturn(Optional.empty());
+        Long authorId = 999L;
+
+        when(authorService.getAuthorById(authorId)).thenReturn(Optional.empty());
 
         ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> {
-            authorController.getAuthor(999L);
+            authorController.getAuthor(authorId);
         });
 
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());
         assertTrue(exception.getReason().contains("Autor não encontrado"));
+        verify(authorService).getAuthorById(authorId);
     }
 
     @Test
     void testUpdateAuthor_Success() {
+        Long authorId = 1L;
         AuthorDto dto = new AuthorDto();
-
         Author updatedAuthor = new Author();
-        updatedAuthor.setId(1L);
+        updatedAuthor.setId(authorId);
 
-        when(authorService.updateAuthor(1L, dto)).thenReturn(updatedAuthor);
+        when(authorService.updateAuthor(authorId, dto)).thenReturn(updatedAuthor);
 
-        ResponseEntity<Author> response = authorController.updateAuthor(1L, dto);
+        ResponseEntity<Author> response = authorController.updateAuthor(authorId, dto);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(updatedAuthor, response.getBody());
-        verify(authorService).updateAuthor(1L, dto);
+        verify(authorService).updateAuthor(authorId, dto);
     }
 
     @Test
     void testDeleteAuthor_Success() {
+        Long authorId = 1L;
         String expectedMessage = "Autor deletado com sucesso";
-        when(authorService.deleteById(1)).thenReturn(expectedMessage);
 
-        ResponseEntity<String> response = authorController.delete(1);
+        when(authorService.deleteById(authorId)).thenReturn(expectedMessage);
+
+        ResponseEntity<String> response = authorController.delete(authorId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expectedMessage, response.getBody());
-        verify(authorService).deleteById(1);
+        verify(authorService).deleteById(authorId);
     }
 }

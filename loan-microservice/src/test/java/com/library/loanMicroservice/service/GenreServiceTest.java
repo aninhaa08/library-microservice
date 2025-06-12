@@ -5,7 +5,6 @@ import com.library.loanMicroservice.repository.GenreRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
@@ -39,12 +38,15 @@ public class GenreServiceTest {
         Genre genre = createGenre(id, "Ficção");
 
         when(genreRepository.findById(id)).thenReturn(Optional.of(genre));
+        doNothing().when(genreRepository).delete(genre);
 
-        String result = genreService.deleteById(id.intValue());
+        String result = genreService.deleteById(id);
 
         assertThat(result).isEqualTo("Gênero excluído.");
 
         verify(genreRepository, times(1)).findById(id);
+        verify(genreRepository, times(1)).delete(genre);
+        verifyNoMoreInteractions(genreRepository);
     }
 
     @Test
@@ -53,10 +55,11 @@ public class GenreServiceTest {
 
         when(genreRepository.findById(id)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> genreService.deleteById(id.intValue()))
+        assertThatThrownBy(() -> genreService.deleteById(id))
                 .isInstanceOf(ResponseStatusException.class)
                 .hasMessageContaining("Gênero não encontrado.");
 
         verify(genreRepository, times(1)).findById(id);
+        verifyNoMoreInteractions(genreRepository);
     }
 }

@@ -20,4 +20,6 @@ public class BookDTO {
     private Integer year_publication;
     private String authorName;
     private Genre genre;
+    private Long authorId;
+    private Long genreId;
 }

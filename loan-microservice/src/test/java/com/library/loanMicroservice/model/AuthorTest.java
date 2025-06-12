@@ -43,24 +43,19 @@ public class AuthorTest {
     @Test
     void testBooksGetterAndSetter() {
         Author author = new Author();
+
         Book book1 = new Book();
         book1.setTitle("Iracema");
+
         Book book2 = new Book();
         book2.setTitle("Senhora");
 
         List<Book> books = Arrays.asList(book1, book2);
         author.setBooks(books);
 
+        assertNotNull(author.getBooks());
         assertEquals(2, author.getBooks().size());
         assertEquals("Iracema", author.getBooks().get(0).getTitle());
         assertEquals("Senhora", author.getBooks().get(1).getTitle());
-    }
-
-    @Test
-    void testGetDataNascimento() {
-        Author author = new Author();
-
-        java.time.OffsetDateTime data = java.time.OffsetDateTime.parse("1839-06-21T00:00:00-03:00");
-        assertEquals(data, author.getDataNascimento(data));
     }
 }

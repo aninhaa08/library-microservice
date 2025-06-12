@@ -4,6 +4,7 @@ import com.library.loanMicroservice.service.GenreService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,29 +25,29 @@ class GenreControllerTest {
 
     @Test
     void delete_ValidId_ReturnsSuccessMessage() {
-        Integer genreId = 1;
+        Long genreId = 1L;
         String expectedMessage = "Gênero deletado com sucesso";
 
         when(genreService.deleteById(genreId)).thenReturn(expectedMessage);
 
         ResponseEntity<String> response = genreController.delete(genreId);
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expectedMessage, response.getBody());
 
         verify(genreService, times(1)).deleteById(genreId);
     }
 
     @Test
-    void delete_InvalidId_ReturnsErrorMessage() {
-        Integer invalidId = 999;
+    void delete_NonExistentId_ReturnsErrorMessage() {
+        Long invalidId = 999L;
         String errorMessage = "Gênero não encontrado";
 
         when(genreService.deleteById(invalidId)).thenReturn(errorMessage);
 
         ResponseEntity<String> response = genreController.delete(invalidId);
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(errorMessage, response.getBody());
 
         verify(genreService, times(1)).deleteById(invalidId);

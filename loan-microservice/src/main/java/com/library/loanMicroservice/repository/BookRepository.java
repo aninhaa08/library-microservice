@@ -15,5 +15,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @NonNull
     Optional<Book> findById(@NonNull Long id);
 
-    List<Book> findByGenre_NameIgnoreCase(String name);
+    List<Book> findByGenre_Id(Long id);
 }

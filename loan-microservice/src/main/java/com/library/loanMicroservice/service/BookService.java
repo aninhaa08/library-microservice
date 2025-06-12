@@ -37,32 +37,32 @@ public class BookService {
     }
 
     public BookDTO createBook(BookDTO dto) {
-        Author author = authorRepository.findByName(dto.getAuthorName())
+        Author author = authorRepository.findById(dto.getAuthorId())
                 .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"));
 
-        Genre genre = genreRepository.findByName(dto.getGenre().getName())
+        Genre genre = genreRepository.findById(dto.getGenreId())
                 .orElseThrow(() -> new EntityNotFoundException("Gênero não encontrado"));
 
-        Book book = Book.builder()
-                .title(dto.getTitle())
-                .author(author)
-                .genre(genre)
-                .year_publication(dto.getYear_publication())
-                .build();
+        Book book = new Book();
+        book.setTitle(dto.getTitle());
+        book.setYear_publication(dto.getYear_publication());
+        book.setAuthor(author);
+        book.setGenre(genre);
 
         Book savedBook = bookRepository.save(book);
 
-        return BookDTO.builder()
-                .id(savedBook.getId())
-                .title(savedBook.getTitle())
-                .authorName(savedBook.getAuthor().getName())
-                .genre(savedBook.getGenre())
-                .year_publication(savedBook.getYear_publication())
-                .build();
+        BookDTO responseDto = new BookDTO();
+        responseDto.setId(savedBook.getId());
+        responseDto.setTitle(savedBook.getTitle());
+        responseDto.setYear_publication(savedBook.getYear_publication());
+        responseDto.setAuthorId(savedBook.getAuthor().getId());
+        responseDto.setGenreId(savedBook.getGenre().getId());
+
+        return responseDto;
     }
 
-    public List<Book> findByGenreName(String genre) {
-        return bookRepository.findByGenre_NameIgnoreCase(genre);
+    public List<Book> findByGenreId(Long genreId) {
+        return bookRepository.findByGenre_Id(genreId);
     }
 
     public BookDTO getBookById(Long id) {
