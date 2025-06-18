@@ -12,7 +12,7 @@ Este projeto é um microserviço responsável por gerenciar o catálogo de uma b
 
 ## 🚀 Rodando o projeto online
 
-|               |                                URL                                |
+|     ...       |                                URL                                |
 -------------------------------------------------------------------------------------
 | Microserviço  |  https://library-microservice.onrender.com/swagger-ui/index.html  |
 
