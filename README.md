@@ -10,6 +10,13 @@ Este projeto é um microserviço responsável por gerenciar o catálogo de uma b
   - ✏️ Edição de dados existentes;
   - 🗑️ Remoção de livros, autores e gêneros.
 
+## 🚀 Rodando o projeto online
+
+|               |                                URL                                |
+-------------------------------------------------------------------------------------
+| Microserviço  |  https://library-microservice.onrender.com/swagger-ui/index.html  |
+
+
 ## 🚀 Como rodar o projeto localmente
 
 Para clonar e executar o projeto localmente, siga os passos abaixo:
@@ -135,10 +142,12 @@ feat-cadastro-livros
 - Aplicação: rodando localmente via `localhost:8080`
 - Requisições via Insomnia/Postman e consultas via DBeaver
 - Swagger rodando em `http://localhost:8080/swagger-ui/index.html#/`
+- Aplicação online rodando em `https://library-microservice.onrender.com/swagger-ui/index.html`
 
 ---
 
 ## 👥 Integrantes do Grupo e funções
+- Todos os integrantes tiveram participação. Em sua maioria, os commits de cada um se concentram em suas devidas branches, nomeadas de acordo com a funcionalidade de cada uma.
 
 | Nome Completo                            | Função/Responsabilidades                                                                                                                                                                                                                                |
 |------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -149,7 +158,7 @@ feat-cadastro-livros
 | Maria Eduarda Loreta Silva Santos        | Criação das rotas "Get Books" e "Post Books"                                                                                                                                                                                                            |
 | Maria Eduarda Santana Marques            | Criação das rotas "Get Books/:id" e "Get Authors/:id"                                                                                                                                                                                                   |
 
-## 👾 Link da apresentação no Canva
+## 👾 Link da apresentação de slides no Canva
 
 https://www.canva.com/design/DAGqAe-0oAc/keGiqYdPoY-0DyUZLJuQVA/edit?utm_content=DAGqAe-0oAc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
