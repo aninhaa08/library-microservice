@@ -10,6 +10,13 @@ Este projeto é um microserviço responsável por gerenciar o catálogo de uma b
   - ✏️ Edição de dados existentes;
   - 🗑️ Remoção de livros, autores e gêneros.
 
+## 🚀 Rodando o projeto online
+
+|               |                                URL                                |
+-------------------------------------------------------------------------------------
+| Microserviço  |  https://library-microservice.onrender.com/swagger-ui/index.html  |
+
+
 ## 🚀 Como rodar o projeto localmente
 
 Para clonar e executar o projeto localmente, siga os passos abaixo:
@@ -135,18 +142,23 @@ feat-cadastro-livros
 - Aplicação: rodando localmente via `localhost:8080`
 - Requisições via Insomnia/Postman e consultas via DBeaver
 - Swagger rodando em `http://localhost:8080/swagger-ui/index.html#/`
+- Aplicação online rodando em `https://library-microservice.onrender.com/swagger-ui/index.html`
 
 ---
 
 ## 👥 Integrantes do Grupo e funções
+- Todos os integrantes tiveram participação. Em sua maioria, os commits de cada um se concentram em suas devidas branches, nomeadas de acordo com a funcionalidade de cada uma.
 
 | Nome Completo                            | Função/Responsabilidades                                                                                                                                                                                                                                |
 |------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Ana Carolina Souto Miranda               | Estrutura da aplicação, configuração do banco de dados (Postgres), configuração do docker (imagem do banco de dados), upload da API e criação das rotas "Put Authors/:id" e "Post Authors"                                                              |
-| Caio Juhasz Danjó                        | Configuração do Swagger, realização dos testes unitários e criação das rotas "Put Books/:id" e "Get Authors"                                                                                                                                            |
+| Caio Juhasz Danjó                        | Configuração do Swagger, realização dos testes unitário, criação das rotas "Put Books/:id" e "Get Authors" e slides.                                                                                                                                      |
 | Felipe Cruz da Silva Santos              | Criação das rotas "Get Books/:genre" e "Get Authors/:books"                                                                                                                                                                                             |
-| Lívia Gabriela Lana Antas                | Configuração do Banco de Dados H2, configuração do docker (imagem da aplicação) e criação das rotas "Delete Genres/:id", "Put Genres/:id", "Post Genres", "Get Genres/:id", "Get Genres", "Delete Genres/:id", "Delete Authors/:id", "Delete Books/:id" |
+| Lívia Gabriela Lana Antas                | Configuração do Banco de Dados H2, configuração do docker (imagem da aplicação), criação das rotas "Delete Genres/:id", "Put Genres/:id", "Post Genres", "Get Genres/:id", "Get Genres", "Delete Genres/:id", "Delete Authors/:id", "Delete Books/:id" e slides. |
 | Maria Eduarda Loreta Silva Santos        | Criação das rotas "Get Books" e "Post Books"                                                                                                                                                                                                            |
 | Maria Eduarda Santana Marques            | Criação das rotas "Get Books/:id" e "Get Authors/:id"                                                                                                                                                                                                   |
 
+## 👾 Link da apresentação de slides no Canva
+
+https://www.canva.com/design/DAGqAe-0oAc/keGiqYdPoY-0DyUZLJuQVA/edit?utm_content=DAGqAe-0oAc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
